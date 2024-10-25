@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:37 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/24 22:57:19 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/25 14:27:39 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-char	*del_line(char *buffer)
+char	*ft_del_line(char *buffer)
 {
 	char	*rtn;
 	int	i;
@@ -28,7 +28,7 @@ char	*del_line(char *buffer)
 	return (rtn);
 }
 
-char	*get_line(char *buffer, int fd)
+char	*ft_get_line(char *buffer, int fd)
 {
 	int		i;
 	char	*temp;
@@ -51,7 +51,7 @@ char	*get_line(char *buffer, int fd)
 	return (temp);
 }
 
-char	*read_file(int fd)
+char	*ft_read_file(int fd)
 {
 	int	rd;
 	char	*rtn;
@@ -75,10 +75,10 @@ char	*get_next_line(int fd)
 	if (fd < 0)
 		return (NULL);
 	if (!buffer)
-		buffer = read_file(fd);
+		buffer = ft_read_file(fd);
 	if(!buffer)
 		return (NULL);
-	line = get_line(buffer, fd);
+	line = ft_get_line(buffer, fd);
 	if (!line)
 		return (NULL);
 	if (line[0] == '\0')
@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 		free(line);
 		return (NULL);
 	}
-	buffer = del_line(buffer);
+	buffer = ft_del_line(buffer);
 	return (line);
 }
 

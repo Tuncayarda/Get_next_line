@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:35 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/24 20:36:45 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/25 14:19:40 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char *s1, char *s2);
 char	*read_file(int fd);
-char	*get_line(char *buffer, int fd);
+char	*ft_get_line(char *buffer, int fd);
 char	*ft_strrchr(const char *s, int c);
 
 #endif
