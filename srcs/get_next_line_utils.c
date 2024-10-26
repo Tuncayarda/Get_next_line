@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:41 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/24 19:17:48 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/26 21:11:18 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,20 +110,4 @@ char	*ft_strjoin(char *s1, char *s2)
 	ptr[ft_strlen(s1) + i] = '\0';
 	free(s1);
 	return (ptr);
-}
-
-char	*ft_strrchr(const char *s, int c)
-{
-	int	i;
-
-	i = ft_strlen(s);
-	if (c == '\0')
-		return ((char *)(s + i));
-	while (i >= 0)
-	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i--;
-	}
-	return (NULL);
 }

@@ -6,17 +6,16 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:35 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/25 14:19:40 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/26 21:14:10 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
-
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>

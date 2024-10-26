@@ -6,25 +6,27 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:37 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/25 14:27:39 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/26 21:14:29 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
 
 char	*ft_del_line(char *buffer)
 {
 	char	*rtn;
-	int	i;
+	int		i;
 
 	i = 0;
 	rtn = NULL;
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
-	if (buffer[i] != '\0')
-		rtn = ft_substr(buffer, i + 1, ft_strlen(buffer + i + 1));
+	if (buffer[i] == '\0')
+	{
+		free(buffer);
+		return (NULL);
+	}
+	rtn = ft_substr(buffer, i + 1, ft_strlen(buffer + i + 1));
 	return (rtn);
 }
 
@@ -33,7 +35,7 @@ char	*ft_get_line(char *buffer, int fd)
 	int		i;
 	char	*temp;
 	int		rd;
-	
+
 	i = 0;
 	rd = BUFFER_SIZE;
 	while (ft_strchr(buffer, '\n') == 0 && rd == BUFFER_SIZE)
@@ -53,7 +55,7 @@ char	*ft_get_line(char *buffer, int fd)
 
 char	*ft_read_file(int fd)
 {
-	int	rd;
+	int		rd;
 	char	*rtn;
 
 	rtn = malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -76,7 +78,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!buffer)
 		buffer = ft_read_file(fd);
-	if(!buffer)
+	if (!buffer)
 		return (NULL);
 	line = ft_get_line(buffer, fd);
 	if (!line)
@@ -89,29 +91,3 @@ char	*get_next_line(int fd)
 	buffer = ft_del_line(buffer);
 	return (line);
 }
-
-/* int main()
-{
-	int fd;
-	char *p;
-
-	fd = open("files/43_with_nl", O_RDWR);
-	printf("fd:%d\n",fd);
-
-	p = get_next_line(fd);
-	printf(" 1: %s", p);
-	free(p);
-
-	p = get_next_line(fd);
-	printf(" 2: %s", p);
-	free(p);
-
-	p = get_next_line(fd);
-	printf(" 3: %s", p);
-	free(p);
-	
-} */
-/* void leaks_check() __attribute__((destructor));
-void leaks_check() {
-    system("leaks a.out");
-} */
