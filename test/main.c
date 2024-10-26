@@ -9,7 +9,7 @@ int main()
 	int fd;
 	char *p;
 
-	fd = open("", O_RDWR);
+	fd = open("files/empty", O_RDWR);
 	printf("fd:%d\n",fd);
 
 	p = get_next_line(fd);
