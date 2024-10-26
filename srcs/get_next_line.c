@@ -6,13 +6,11 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:37 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/26 21:37:08 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/26 21:39:05 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
 
 char	*ft_del_line(char *buffer)
 {
@@ -23,6 +21,11 @@ char	*ft_del_line(char *buffer)
 	rtn = NULL;
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
+	if (buffer[i] == '\0')
+    {
+        free(buffer);
+        return (NULL);
+    }
 	rtn = ft_substr(buffer, i + 1, ft_strlen(buffer + i + 1));
 	free(buffer);
 	return (rtn);
