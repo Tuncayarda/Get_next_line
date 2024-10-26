@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:37 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/26 21:41:01 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/26 21:52:35 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_del_line(char *buffer)
 {
 	char	*rtn;
-	int	i;
+	int		i;
 
 	i = 0;
 	rtn = NULL;
@@ -33,8 +33,8 @@ char	*ft_del_line(char *buffer)
 
 char	*ft_get_line(char *buffer)
 {
-	char *line;
-	int i;
+	char	*line;
+	int		i;
 
 	i = 0;
 	while (buffer[i] != '\n' && buffer[i] != '\0')
@@ -47,6 +47,7 @@ char	*ft_fill_buff(char *buffer, int fd)
 {
 	char	*temp;
 	int		rd;
+
 	rd = BUFFER_SIZE;
 	while (ft_strchr(buffer, '\n') == 0 && rd == BUFFER_SIZE)
 	{
@@ -68,7 +69,7 @@ char	*ft_read_file(int fd)
 
 	rtn = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!rtn)
-			return (NULL);
+		return (NULL);
 	rd = read(fd, rtn, BUFFER_SIZE);
 	if (rd == -1 || rd == 0)
 	{
@@ -83,12 +84,12 @@ char	*get_next_line(int fd)
 {
 	static char	*buffer;
 	char		*line;
-	
-	if (fd < 0)	
+
+	if (fd < 0)
 		return (NULL);
 	if (!buffer)
 		buffer = ft_read_file(fd);
-	if(!buffer)
+	if (!buffer)
 		return (NULL);
 	buffer = ft_fill_buff(buffer, fd);
 	line = ft_get_line(buffer);
