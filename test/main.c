@@ -9,7 +9,7 @@ int main()
 	int fd;
 	char *p;
 
-	fd = open("files/empty", O_RDWR);
+	fd = open("files/43_with_nl", O_RDWR);
 	printf("fd:%d\n",fd);
 
 	p = get_next_line(fd);
@@ -26,7 +26,8 @@ int main()
 
 }
 
-void leaks_check()
+/* void leaks_check()
 {
 	system("leaks a.out");
 } 
+ */
