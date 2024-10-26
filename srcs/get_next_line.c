@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:37 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/26 19:37:32 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/26 21:37:08 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,8 @@ char	*ft_get_line(char *buffer)
 
 char	*ft_fill_buff(char *buffer, int fd)
 {
-	int		i;
 	char	*temp;
 	int		rd;
-
-	i = 0;
 	rd = BUFFER_SIZE;
 	while (ft_strchr(buffer, '\n') == 0 && rd == BUFFER_SIZE)
 	{
@@ -102,29 +99,3 @@ char	*get_next_line(int fd)
 	buffer = ft_del_line(buffer);
 	return (line);
 }
-
-int main()
-{
-	int fd;
-	char *p;
-
-	fd = open("files/43_with_nl", O_RDWR);
-	printf("fd:%d\n",fd);
-
-	p = get_next_line(fd);
-	printf(" 1: %s", p);
-	free(p);
-
-	p = get_next_line(fd);
-	printf(" 2: %s", p);
-	free(p);
-
-	p = get_next_line(fd);
-	printf(" 3: %s", p);
-	free(p);
-	
-}
-/* void leaks_check() __attribute__((destructor));
-void leaks_check() {
-    system("leaks a.out");
-} */
