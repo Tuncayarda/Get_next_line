@@ -9,7 +9,7 @@ int main()
 	int fd;
 	char *p;
 
-	fd = open("files/43_with_nl", O_RDWR);
+	fd = open("test_files/files_0/43_with_nl", O_RDWR);
 	printf("fd:%d\n",fd);
 
 	p = get_next_line(fd);
