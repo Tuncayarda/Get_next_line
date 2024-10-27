@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:41 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/26 21:50:23 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/27 21:01:41 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,31 +83,27 @@ char	*ft_strdup(char *s1)
 	return (str);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)//esadın strjoini
 {
-	char	*ptr;
-	size_t	total_len;
+	char	*str;
 	size_t	i;
+	size_t	j;
 
-	if (!s1 && !s2)
-		return (NULL);
-	total_len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	ptr = malloc(total_len * sizeof(char) + 1);
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	if (!s1)
 	{
-		ptr[i] = s1[i];
-		i++;
+		s1 = malloc(1 * sizeof(char));
+		*s1 = '\0';
 	}
-	i = 0;
-	while (s2[i])
-	{
-		ptr[ft_strlen(s1) + i] = s2[i];
-		i++;
-	}
-	ptr[ft_strlen(s1) + i] = '\0';
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	i = -1;
+	while (*(s1 + ++i))
+		*(str + i) = *(s1 + i);
+	j = -1;
+	while (*(s2 + ++j))
+		*(str + i + j) = *(s2 + j);
+	*(str + i + j) = '\0';
 	free(s1);
-	return (ptr);
+	return (str);
 }
