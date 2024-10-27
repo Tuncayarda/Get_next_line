@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:37 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/27 21:06:28 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/27 22:37:49 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_del_line(char *buffer)
 		return (NULL);
 	}
 	i++;
-	rtn = ft_substr(buffer, i , ft_strlen(buffer) - i);
+	rtn = ft_substr(buffer, i, ft_strlen(buffer) - i);
 	free(buffer);
 	return (rtn);
 }
@@ -50,21 +50,24 @@ char	*ft_fill_buff(char *buffer, int fd)
 	int		rd;
 
 	rd = BUFFER_SIZE;
+	temp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	while (ft_strchr(buffer, '\n') == 0 && rd == BUFFER_SIZE)
 	{
-		temp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		rd = read(fd, temp, BUFFER_SIZE);
-		if(rd == -1)
+		if (rd == -1)
 		{
-			free(temp);
 			free(buffer);
+			free(temp);
 			return (NULL);
 		}
 		temp[rd] = '\0';
 		buffer = ft_strjoin(buffer, temp);
-		free(temp);
-		if (!buffer)
-			return (NULL);
+	}
+	free(temp);
+	if (!buffer[0])
+	{
+		free(buffer);
+		return (NULL);
 	}
 	return (buffer);
 }
@@ -78,7 +81,7 @@ char	*ft_read_file(int fd, char *buffer)
 	if (!rtn)
 		return (NULL);
 	rd = read(fd, rtn, BUFFER_SIZE);
-	if (rd == -1 || rd == 0)
+	if (rd == -1)
 	{
 		free(rtn);
 		free(buffer);
@@ -100,14 +103,9 @@ char	*get_next_line(int fd)
 	if (!buffer)
 		return (NULL);
 	buffer = ft_fill_buff(buffer, fd);
+	if (!buffer)
+		return (NULL);
 	line = ft_get_line(buffer);
-	if (!line)
-		return (NULL);
-	if (line[0] == '\0')
-	{
-		free(line);
-		return (NULL);
-	}
 	buffer = ft_del_line(buffer);
 	return (line);
 }

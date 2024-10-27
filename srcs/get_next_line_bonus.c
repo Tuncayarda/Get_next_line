@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 01:14:21 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/27 20:57:16 by tuaydin          ###   ########.fr       */
+/*   Created: 2024/10/27 22:58:18 by tuaydin           #+#    #+#             */
+/*   Updated: 2024/10/27 23:00:00 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char	*ft_del_line(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	rtn = ft_substr(buffer, i + 1, ft_strlen(buffer + i + 1));
+	i++;
+	rtn = ft_substr(buffer, i, ft_strlen(buffer) - i);
 	free(buffer);
 	return (rtn);
 }
@@ -49,20 +50,29 @@ char	*ft_fill_buff(char *buffer, int fd)
 	int		rd;
 
 	rd = BUFFER_SIZE;
+	temp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	while (ft_strchr(buffer, '\n') == 0 && rd == BUFFER_SIZE)
 	{
-		temp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		rd = read(fd, temp, BUFFER_SIZE);
+		if (rd == -1)
+		{
+			free(buffer);
+			free(temp);
+			return (NULL);
+		}
 		temp[rd] = '\0';
 		buffer = ft_strjoin(buffer, temp);
-		free(temp);
-		if (!buffer)
-			return (NULL);
+	}
+	free(temp);
+	if (!buffer[0])
+	{
+		free(buffer);
+		return (NULL);
 	}
 	return (buffer);
 }
 
-char	*ft_read_file(int fd)
+char	*ft_read_file(int fd, char *buffer)
 {
 	int		rd;
 	char	*rtn;
@@ -71,9 +81,10 @@ char	*ft_read_file(int fd)
 	if (!rtn)
 		return (NULL);
 	rd = read(fd, rtn, BUFFER_SIZE);
-	if (rd == -1 || rd == 0)
+	if (rd == -1)
 	{
 		free(rtn);
+		free(buffer);
 		return (NULL);
 	}
 	rtn[rd] = '\0';
@@ -82,24 +93,19 @@ char	*ft_read_file(int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[10000];
+	static char	*buffer[10024];
 	char		*line;
 
 	if (fd < 0)
 		return (NULL);
-	if (!(buffer[fd]))
-		buffer[fd] = ft_read_file(fd);
-	if (!(buffer[fd]))
+	if (!buffer[fd])
+		buffer[fd] = ft_read_file(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
 	buffer[fd] = ft_fill_buff(buffer[fd], fd);
+	if (!buffer[fd])
+		return (NULL);
 	line = ft_get_line(buffer[fd]);
-	if (!line)
-		return (NULL);
-	if (line[0] == '\0')
-	{
-		free(line);
-		return (NULL);
-	}
 	buffer[fd] = ft_del_line(buffer[fd]);
 	return (line);
 }

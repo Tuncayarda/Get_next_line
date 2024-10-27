@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 01:14:09 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/27 20:38:04 by tuaydin          ###   ########.fr       */
+/*   Created: 2024/10/27 22:44:38 by tuaydin           #+#    #+#             */
+/*   Updated: 2024/10/27 22:44:48 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	i = 0;
 	if (!s)
 		return (NULL);
-	else if (ft_strlen(s) < start || len == 0)
+	else if (ft_strlen(s) < start)
 		return (ft_strdup(""));
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
 	str = malloc(sizeof(char) * (len + 1));
-	if (str == NULL)
+	if (!str)
 		return (NULL);
 	while (i < len && start < ft_strlen(s))
 	{
