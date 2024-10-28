@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:41 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/27 22:43:13 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/28 19:04:33 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	total_len;
 	size_t	i;
 
-	if (!s1 && !s2)
+	if (!s1 || !s2)
 		return (NULL);
 	total_len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	ptr = malloc(total_len * sizeof(char));
@@ -108,6 +108,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	ptr[ft_strlen(s1) + i] = '\0';
-	free(s1);
-	return (ptr);
+	return (free(s1), ptr);
 }

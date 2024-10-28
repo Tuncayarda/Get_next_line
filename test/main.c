@@ -9,16 +9,18 @@ int main()
 	int fd;
 	char *p;
 
-	fd = open("test_files/files_0/multiple_line_with_nl", O_RDWR);
+	fd = open("test_files/files_1/1char.txt", O_RDONLY);
+
 	printf("fd:%d\n",fd);
 
 	p = get_next_line(fd);
 	printf(" 1: %s", p);
 	free(p);
+
 	p = get_next_line(fd);
 	printf(" 1: %s", p);
 	free(p);
-	
+
 	p = get_next_line(fd);
 	printf(" 1: %s", p);
 	free(p);

@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 22:58:18 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/27 23:00:00 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/28 18:45:25 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char	*ft_get_line(char *buffer)
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
 	line = ft_substr(buffer, 0, i + 1);
+	if (!line)
+		free(buffer);
 	return (line);
 }
 
@@ -51,24 +53,24 @@ char	*ft_fill_buff(char *buffer, int fd)
 
 	rd = BUFFER_SIZE;
 	temp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while (ft_strchr(buffer, '\n') == 0 && rd == BUFFER_SIZE)
-	{
-		rd = read(fd, temp, BUFFER_SIZE);
-		if (rd == -1)
-		{
-			free(buffer);
-			free(temp);
-			return (NULL);
-		}
-		temp[rd] = '\0';
-		buffer = ft_strjoin(buffer, temp);
-	}
-	free(temp);
-	if (!buffer[0])
+	if (!temp)
 	{
 		free(buffer);
 		return (NULL);
 	}
+	while (ft_strchr(buffer, '\n') == 0 && rd == BUFFER_SIZE)
+	{
+		rd = read(fd, temp, BUFFER_SIZE);
+		if (rd == -1)
+			return (free(buffer), free(temp), NULL);
+		temp[rd] = '\0';
+		buffer = ft_strjoin(buffer, temp);
+		if (!buffer)
+			return (free(temp), NULL);
+	}
+	free(temp);
+	if (!buffer[0])
+		return (free(buffer), NULL);
 	return (buffer);
 }
 
@@ -81,7 +83,7 @@ char	*ft_read_file(int fd, char *buffer)
 	if (!rtn)
 		return (NULL);
 	rd = read(fd, rtn, BUFFER_SIZE);
-	if (rd == -1)
+	if (rd == -1 || rd == 0)
 	{
 		free(rtn);
 		free(buffer);
@@ -93,10 +95,10 @@ char	*ft_read_file(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[10024];
+	static char	*buffer[1024];
 	char		*line;
 
-	if (fd < 0)
+	if (fd < 0 || fd >= 1024)
 		return (NULL);
 	if (!buffer[fd])
 		buffer[fd] = ft_read_file(fd, buffer[fd]);
