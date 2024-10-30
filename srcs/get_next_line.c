@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:37 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/28 19:11:40 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/30 20:46:48 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ char	*ft_fill_buff(char *buffer, int fd)
 	char	*temp;
 	int		rd;
 
-	rd = BUFFER_SIZE;
+	rd = 1;
 	temp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!temp)
 	{
 		free(buffer);
 		return (NULL);
 	}
-	while (ft_strchr(buffer, '\n') == 0 && rd == BUFFER_SIZE)
+	while (ft_strchr(buffer, '\n') == 0 && rd != 0)
 	{
 		rd = read(fd, temp, BUFFER_SIZE);
 		if (rd == -1)
