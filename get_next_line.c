@@ -6,13 +6,13 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:37 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/30 20:46:48 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/11/09 23:29:07 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_del_line(char *buffer)
+char	*ft_del_line_gnl(char *buffer)
 {
 	char	*rtn;
 	int		i;
@@ -32,7 +32,7 @@ char	*ft_del_line(char *buffer)
 	return (rtn);
 }
 
-char	*ft_get_line(char *buffer)
+char	*ft_get_line_gnl(char *buffer)
 {
 	char	*line;
 	int		i;
@@ -46,7 +46,7 @@ char	*ft_get_line(char *buffer)
 	return (line);
 }
 
-char	*ft_fill_buff(char *buffer, int fd)
+char	*ft_fill_buff_gnl(char *buffer, int fd)
 {
 	char	*temp;
 	int		rd;
@@ -58,13 +58,13 @@ char	*ft_fill_buff(char *buffer, int fd)
 		free(buffer);
 		return (NULL);
 	}
-	while (ft_strchr(buffer, '\n') == 0 && rd != 0)
+	while (ft_strchr_gnl(buffer, '\n') == 0 && rd != 0)
 	{
 		rd = read(fd, temp, BUFFER_SIZE);
 		if (rd == -1)
 			return (free(buffer), free(temp), NULL);
 		temp[rd] = '\0';
-		buffer = ft_strjoin(buffer, temp);
+		buffer = ft_strjoin_gnl(buffer, temp);
 		if (!buffer)
 			return (free(temp), NULL);
 	}

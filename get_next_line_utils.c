@@ -6,13 +6,13 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:41 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/28 19:04:33 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/11/09 23:29:42 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen_gnl(char *str)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	i;
@@ -30,14 +30,14 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	i = 0;
 	if (!s)
 		return (NULL);
-	else if (ft_strlen(s) < start)
-		return (ft_strdup(""));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
+	else if (ft_strlen_gnl(s) < start)
+		return (ft_strdup_gnl(""));
+	if (len > ft_strlen_gnl(s + start))
+		len = ft_strlen_gnl(s + start);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	while (i < len && start < ft_strlen(s))
+	while (i < len && start < ft_strlen_gnl(s))
 	{
 		str[i] = s[start + i];
 		i++;
@@ -64,13 +64,13 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(char *s1)
+char	*ft_strdup_gnl(char *s1)
 {
 	char	*str;
 	size_t	i;
 
 	i = 0;
-	str = malloc(ft_strlen(s1) + 1);
+	str = malloc(ft_strlen_gnl(s1) + 1);
 	if (str)
 	{
 		while (s1[i])
@@ -83,7 +83,7 @@ char	*ft_strdup(char *s1)
 	return (str);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	char	*ptr;
 	size_t	total_len;
@@ -91,7 +91,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	total_len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	total_len = ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1;
 	ptr = malloc(total_len * sizeof(char));
 	if (!ptr)
 		return (NULL);
@@ -104,9 +104,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	while (s2[i])
 	{
-		ptr[ft_strlen(s1) + i] = s2[i];
+		ptr[ft_strlen_gnl(s1) + i] = s2[i];
 		i++;
 	}
-	ptr[ft_strlen(s1) + i] = '\0';
+	ptr[ft_strlen_gnl(s1) + i] = '\0';
 	return (free(s1), ptr);
 }

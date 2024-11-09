@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 22:58:18 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/30 20:47:19 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/11/09 23:30:42 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_del_line(char *buffer)
 		return (NULL);
 	}
 	i++;
-	rtn = ft_substr(buffer, i, ft_strlen(buffer) - i);
+	rtn = ft_substr_gnlb(buffer, i, ft_strlen_gnlb(buffer) - i);
 	free(buffer);
 	return (rtn);
 }
@@ -40,7 +40,7 @@ char	*ft_get_line(char *buffer)
 	i = 0;
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
-	line = ft_substr(buffer, 0, i + 1);
+	line = ft_substr_gnlb(buffer, 0, i + 1);
 	if (!line)
 		free(buffer);
 	return (line);
@@ -58,13 +58,13 @@ char	*ft_fill_buff(char *buffer, int fd)
 		free(buffer);
 		return (NULL);
 	}
-	while (ft_strchr(buffer, '\n') == 0 && rd != 0)
+	while (ft_strchr_gnlb(buffer, '\n') == 0 && rd != 0)
 	{
 		rd = read(fd, temp, BUFFER_SIZE);
 		if (rd == -1)
 			return (free(buffer), free(temp), NULL);
 		temp[rd] = '\0';
-		buffer = ft_strjoin(buffer, temp);
+		buffer = ft_strjoin_gnlb(buffer, temp);
 		if (!buffer)
 			return (free(temp), NULL);
 	}
