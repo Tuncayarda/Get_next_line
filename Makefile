@@ -9,6 +9,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
+	ranlib $(NAME)
 
 clean:
 	rm -f $(OBJS)
