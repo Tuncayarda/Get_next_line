@@ -6,13 +6,13 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:37 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/11/09 23:29:07 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/11/09 23:37:44 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_del_line_gnl(char *buffer)
+char	*ft_del_line(char *buffer)
 {
 	char	*rtn;
 	int		i;
@@ -27,12 +27,12 @@ char	*ft_del_line_gnl(char *buffer)
 		return (NULL);
 	}
 	i++;
-	rtn = ft_substr(buffer, i, ft_strlen(buffer) - i);
+	rtn = ft_substr_gnl(buffer, i, ft_strlen_gnl(buffer) - i);
 	free(buffer);
 	return (rtn);
 }
 
-char	*ft_get_line_gnl(char *buffer)
+char	*ft_get_line(char *buffer)
 {
 	char	*line;
 	int		i;
@@ -40,13 +40,13 @@ char	*ft_get_line_gnl(char *buffer)
 	i = 0;
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
-	line = ft_substr(buffer, 0, i + 1);
+	line = ft_substr_gnl(buffer, 0, i + 1);
 	if (!line)
 		free(buffer);
 	return (line);
 }
 
-char	*ft_fill_buff_gnl(char *buffer, int fd)
+char	*ft_fill_buff(char *buffer, int fd)
 {
 	char	*temp;
 	int		rd;
