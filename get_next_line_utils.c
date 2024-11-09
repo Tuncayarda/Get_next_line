@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:47:41 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/11/09 23:29:42 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/11/09 23:38:58 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_substr_gnl(char *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr_gnl(char *s, int c)
 {
 	size_t	i;
 
